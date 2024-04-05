@@ -133,6 +133,12 @@ int pcf85063a_get_time(i2c_driver_t driver, rtc_time_t *pTime) {
     return 0;
 }
 
+void pcf85063a_software_reset(i2c_driver_t driver)
+{
+    uint8_t tmp = 0x58;
+    i2c_write_register(driver, REG_CTRL1, &tmp, sizeof(uint8_t));
+}
+
 
 #ifdef I2C_DEVICES_STRUCT_TM_CONVERSION
 rtc_time_t pcf85063a_rtc_from_tm(struct tm tm) {
